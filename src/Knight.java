@@ -1,0 +1,40 @@
+package chess;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Knight extends Piece {
+    
+    public Knight(Color color, Position position) {
+        super(color, position);
+    }
+    
+    @Override
+    public String getSymbol() {
+        return color == Color.WHITE ? "♘" : "♞";
+    }
+    
+    @Override
+    public List<Position> getValidMoves(Board board) {
+        List<Position> moves = new ArrayList<>();
+        
+        // Knight's L-shaped moves
+        int[][] knightMoves = {
+            {-2, -1}, {-2, 1}, {-1, -2}, {-1, 2},
+            {1, -2}, {1, 2}, {2, -1}, {2, 1}
+        };
+        
+        for (int[] move : knightMoves) {
+            Position newPos = position.add(move[0], move[1]);
+            if (newPos.isValid()) {
+                Piece target = board.getPiece(newPos);
+                if (target == null || target.getColor() != this.color) {
+                    moves.add(newPos);
+                }
+            }
+        }
+        
+        return moves;
+    }
+}
+

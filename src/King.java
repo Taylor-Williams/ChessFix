@@ -3,7 +3,7 @@ package chess;
 import java.util.List;
 import java.util.ArrayList;
 
-public class King extends Piece {
+public class King implements Piece {
     
     public King(Color color, Position position) {
         super(color, position);

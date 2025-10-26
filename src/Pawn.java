@@ -3,7 +3,7 @@ package chess;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Pawn extends Piece {
+public class Pawn implements Piece {
     
     public Pawn(Color color, Position position) {
         super(color, position);

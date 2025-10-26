@@ -7,6 +7,7 @@ import java.util.Map;
 public class Board {
     private Piece[][] grid;
     private Map<Color, List<Piece>> pieces;
+    private PieceFactory pieceFactory = new PieceFactory();
     
     public Board() {
         this.grid = new Piece[8][8];
@@ -17,35 +18,35 @@ public class Board {
     private void initializeBoard() {
         // Initialize pawns
         for (int col = 0; col < 8; col++) {
-            setPiece(new Pawn(Color.WHITE, new Position(6, col)));
-            setPiece(new Pawn(Color.BLACK, new Position(1, col)));
+            setPiece(pieceFactory.createPiece("pawn", Color.WHITE, new Position(6, col)));
+            setPiece(pieceFactory.createPiece("pawn", Color.BLACK, new Position(1, col)));
         }
         
         // Initialize rooks
-        setPiece(new Rook(Color.WHITE, new Position(7, 0)));
-        setPiece(new Rook(Color.WHITE, new Position(7, 7)));
-        setPiece(new Rook(Color.BLACK, new Position(0, 0)));
-        setPiece(new Rook(Color.BLACK, new Position(0, 7)));
+        setPiece(pieceFactory.createPiece("rook", Color.WHITE, new Position(7, 0)));
+        setPiece(pieceFactory.createPiece("rook", Color.WHITE, new Position(7, 7)));
+        setPiece(pieceFactory.createPiece("rook", Color.BLACK, new Position(0, 0)));
+        setPiece(pieceFactory.createPiece("rook", Color.BLACK, new Position(0, 7)));
         
         // Initialize knights
-        setPiece(new Knight(Color.WHITE, new Position(7, 1)));
-        setPiece(new Knight(Color.WHITE, new Position(7, 6)));
-        setPiece(new Knight(Color.BLACK, new Position(0, 1)));
-        setPiece(new Knight(Color.BLACK, new Position(0, 6)));
+        setPiece(pieceFactory.createPiece("knight", Color.WHITE, new Position(7, 1)));
+        setPiece(pieceFactory.createPiece("knight", Color.WHITE, new Position(7, 6)));
+        setPiece(pieceFactory.createPiece("knight", Color.BLACK, new Position(0, 1)));
+        setPiece(pieceFactory.createPiece("knight", Color.BLACK, new Position(0, 6)));
         
         // Initialize bishops
-        setPiece(new Bishop(Color.WHITE, new Position(7, 2)));
-        setPiece(new Bishop(Color.WHITE, new Position(7, 5)));
-        setPiece(new Bishop(Color.BLACK, new Position(0, 2)));
-        setPiece(new Bishop(Color.BLACK, new Position(0, 5)));
+        setPiece(pieceFactory.createPiece("bishop", Color.WHITE, new Position(7, 2)));
+        setPiece(pieceFactory.createPiece("bishop", Color.WHITE, new Position(7, 5)));
+        setPiece(pieceFactory.createPiece("bishop", Color.BLACK, new Position(0, 2)));
+        setPiece(pieceFactory.createPiece("bishop", Color.BLACK, new Position(0, 5)));
         
         // Initialize queens
-        setPiece(new Queen(Color.WHITE, new Position(7, 3)));
-        setPiece(new Queen(Color.BLACK, new Position(0, 3)));
+        setPiece(pieceFactory.createPiece("queen", Color.WHITE, new Position(7, 3)));
+        setPiece(pieceFactory.createPiece("queen", Color.BLACK, new Position(0, 3)));
         
         // Initialize kings
-        setPiece(new King(Color.WHITE, new Position(7, 4)));
-        setPiece(new King(Color.BLACK, new Position(0, 4)));
+        setPiece(pieceFactory.createPiece("king", Color.WHITE, new Position(7, 4)));
+        setPiece(pieceFactory.createPiece("king", Color.BLACK, new Position(0, 4)));
     }
     
     public void setPiece(Piece piece) {

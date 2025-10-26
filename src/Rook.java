@@ -3,18 +3,28 @@ package chess;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Rook extends Piece {
+public class Rook implements Piece {
     
     public Rook(Color color, Position position) {
         super(color, position);
     }
     
-    @Override
+    public Color getColor() {
+        return color;
+    }
+    
+    public Position getPosition() {
+        return position;
+    }
+    
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     public String getSymbol() {
         return color == Color.WHITE ? "♖" : "♜";
     }
     
-    @Override
     public List<Position> getValidMoves(Board board) {
         List<Position> moves = new ArrayList<>();
         
@@ -37,8 +47,20 @@ public class Rook extends Piece {
                 }
             }
         }
-        
         return moves;
+    }
+
+    public List<Position> filterValidMoves(List<Position> potentialMoves, Board board) {
+        List<Position> validMoves = new ArrayList<>();
+        for (Position move : potentialMoves) {
+            if (move.isValid()) {
+                Piece targetPiece = board.getPiece(move);
+                if (targetPiece == null || targetPiece.getColor() != this.color) {
+                    validMoves.add(move);
+                }
+            }
+        }
+        return validMoves;
     }
 }
 

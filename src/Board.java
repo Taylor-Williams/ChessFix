@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.Map;
 public class Board {
     private Piece[][] grid;
     private Map<Color, List<Piece>> pieces;
+    private ArrayList<Move> moveHistory = new ArrayList<>();
     private PieceFactory pieceFactory = new PieceFactory();
     
     public Board() {
@@ -68,8 +70,22 @@ public class Board {
         grid[from.getRow()][from.getCol()] = null;
         
         // Move piece to new position
+        piece.getValidMoves();
         piece.setPosition(to);
         grid[to.getRow()][to.getCol()] = piece;
+    }
+
+    public boolean makeMove(Position to, Position from) {
+        Piece piece = getPiece(from);
+        if (piece == null) return false;
+        Move move = new Move(piece, to, from);
+        if (move.isValid()) {
+            piece.movePiece(from, to);
+            moveHistory.add(move);
+            return true;
+        } else {
+            return false;
+        }
     }
     
     public void display() {
@@ -93,6 +109,16 @@ public class Board {
         
         System.out.println(" └─────────────────┘");
         System.out.println("  a b c d e f g h\n");
+    }
+
+    public String recordGame() {
+        // this could be meant to be written to a file, but for now just return the string
+        return this.toString();
+    }
+
+    public String toString() {
+        // not a full implementation of how chess games are recorded, but a simple move list
+        return moveHistory.toString();
     }
 }
 

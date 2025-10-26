@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ChessGame {
-    private Board board;
+    public Board board;
     private Color currentPlayer;
     private Scanner scanner;
     
@@ -52,27 +52,5 @@ public class ChessGame {
         scanner.close();
     }
     
-    private boolean makeMove(Position from, Position to) {
-        Piece piece = board.getPiece(from);
-        
-        if (piece == null) {
-            System.out.println("No piece at that position!");
-            return false;
-        }
-        
-        if (piece.getColor() != currentPlayer) {
-            System.out.println("Not your piece!");
-            return false;
-        }
-        
-        List<Position> validMoves = piece.getValidMoves(board);
-        if (!validMoves.contains(to)) {
-            System.out.println("Invalid move!");
-            return false;
-        }
-        
-        board.movePiece(from, to);
-        return true;
-    }
 }
 

@@ -3,7 +3,7 @@ package chess;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Rook extends Piece {
+public class Rook implements Piece {
     
     public Rook(Color color, Position position) {
         super(color, position);
@@ -47,7 +47,6 @@ public class Rook extends Piece {
                 }
             }
         }
-        
         return moves;
     }
 
